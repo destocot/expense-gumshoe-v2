@@ -3,7 +3,6 @@ import { ThemeToggler } from '@/components/theme-toggler'
 import { SignedIn, SignedOut } from '@/features/auth/components/signed-in-out'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { LogoutButton } from '@/features/auth/components/logout-button'
 
 const Header = ({ children }: { children?: React.ReactNode }) => {
   return (
