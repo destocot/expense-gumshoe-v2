@@ -11,7 +11,7 @@ export const LoginForm = () => {
 
   return (
     <form action={action} className='space-y-4'>
-      <div>
+      <div className='space-y-2'>
         <Label htmlFor='username'>Username</Label>
         <Input
           type='text'
@@ -26,7 +26,7 @@ export const LoginForm = () => {
         </p>
       </div>
 
-      <div>
+      <div className='space-y-2'>
         <Label htmlFor='password'>Password</Label>
         <Input type='password' id='password' name='password' aria-describedby='password-error' />
         <p id='password-error' className='text-[0.8rem] font-medium text-destructive'>

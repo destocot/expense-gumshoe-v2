@@ -14,6 +14,7 @@ export default async function HomePage() {
         <div className='w-full space-y-8'>
           <div className='flex items-center justify-between'>
             <h1 className='text-3xl font-bold'>Expenses</h1>
+
             <Button size='sm' asChild>
               <Link href='/expenses/new'>
                 <PlusIcon />

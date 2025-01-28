@@ -6,7 +6,7 @@ import { auth } from '@/lib/auth'
 import { revalidatePath } from 'next/cache'
 
 export async function createExpenseAction(values: CreateExpenseInput) {
-  const output = CreateExpenseSchema.safeParse({})
+  const output = CreateExpenseSchema.safeParse(values)
 
   if (!output.success) return { error: output.error.format() }
 

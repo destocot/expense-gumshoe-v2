@@ -44,12 +44,6 @@ export const MainHeader = () => {
               </Button>
             </SignedIn>
           </li>
-
-          <li>
-            <SignedIn>
-              <LogoutButton />
-            </SignedIn>
-          </li>
         </ul>
 
         <ThemeToggler />
