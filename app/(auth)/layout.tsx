@@ -9,7 +9,7 @@ export default function AuthLayout({
   return (
     <>
       <AuthHeader />
-      <main className='h-[calc(100vh-4rem-4rem)]'>{children}</main>
+      <main className='h-[calc(100dvh-4rem-4rem)]'>{children}</main>
       <Footer />
     </>
   )
