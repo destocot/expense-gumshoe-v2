@@ -7,7 +7,7 @@ export default async function Page() {
   if (!session) redirect('/login')
 
   return (
-    <div className='container mx-auto h-full max-w-screen-md px-4 py-16 sm:px-8'>
+    <div className='container mx-auto h-full max-w-screen-md px-4 py-8 sm:px-8'>
       <div className='w-full space-y-8'>
         <div className='flex items-center justify-between'>
           <h1 className='text-3xl font-bold'>Profile</h1>

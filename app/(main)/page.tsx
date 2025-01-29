@@ -13,7 +13,7 @@ export default async function HomePage() {
   if (!expenses) {
     return (
       <>
-        <div className='container mx-auto h-full max-w-screen-md px-4 py-16 sm:px-8'>
+        <div className='container mx-auto h-full max-w-screen-md px-4 py-8 sm:px-8'>
           <div className='w-full space-y-8'>
             <div className='flex items-center justify-between'>
               <h1 className='text-3xl font-bold'>Expenses</h1>
@@ -51,7 +51,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className='container mx-auto flex h-[calc(100dvh-4rem-4rem)] max-w-screen-md px-4 py-16 sm:px-8'>
+      <div className='container mx-auto flex h-[calc(100dvh-4rem-4rem)] max-w-screen-md px-4 py-8 sm:px-8'>
         <div className='flex h-full w-full flex-col gap-y-8'>
           <div className='flex items-center justify-between'>
             <h1 className='text-3xl font-bold'>Expenses</h1>
