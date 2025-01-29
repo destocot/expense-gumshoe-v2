@@ -67,7 +67,7 @@ export default async function HomePage() {
           <Card>
             <div className='flex items-center justify-between p-6'>
               <h2
-                className={cn('flex-1 text-2xl font-bold tabular-nums', {
+                className={cn('flex-1 text-xl font-bold tabular-nums sm:text-2xl', {
                   'text-green-500': aggregations.net > 0,
                   'text-red-500': aggregations.net < 0,
                 })}
@@ -76,10 +76,10 @@ export default async function HomePage() {
               </h2>
 
               <div className='flex flex-1 justify-between'>
-                <h3 className='text-xl font-bold tabular-nums text-blue-500'>
+                <h3 className='text-lg font-bold tabular-nums text-blue-500 sm:text-xl'>
                   {formatCurrency(aggregations.savings)}
                 </h3>
-                <h3 className='text-xl font-bold tabular-nums text-yellow-500'>
+                <h3 className='text-lg font-bold tabular-nums text-yellow-500 sm:text-xl'>
                   {formatCurrency(aggregations.other)}
                 </h3>
               </div>
