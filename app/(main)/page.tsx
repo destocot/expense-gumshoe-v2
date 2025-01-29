@@ -1,17 +1,58 @@
 import { findAllExpenses } from '@/features/expenses/queries'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { PlusIcon } from 'lucide-react'
-import { formatCurrency, formatDate } from '@/lib/utils'
+import { ArrowRightIcon, PlusIcon } from 'lucide-react'
+import { cn, formatCurrency, formatDate } from '@/lib/utils'
 import { ExpenseTypeBadge } from '@/features/expenses/components/expense-type-badge'
+import { Card } from '@/components/ui/card'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default async function HomePage() {
   const expenses = await findAllExpenses()
 
+  if (!expenses) {
+    return (
+      <>
+        <div className='container mx-auto h-full max-w-screen-md px-4 py-16 sm:px-8'>
+          <div className='w-full space-y-8'>
+            <div className='flex items-center justify-between'>
+              <h1 className='text-3xl font-bold'>Expenses</h1>
+
+              <Button size='sm' asChild>
+                <Link href='/login'>
+                  Get Started
+                  <ArrowRightIcon />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  const aggregations = expenses.reduce(
+    (accu, { type, amount }) => {
+      switch (type) {
+        case 'EXPENSE':
+          return { ...accu, net: accu.net - amount }
+        case 'INCOME':
+          return { ...accu, net: accu.net + amount }
+        case 'OTHER':
+          return { ...accu, other: accu.other + amount }
+        case 'SAVINGS':
+          return { ...accu, savings: accu.savings + amount }
+        default:
+          return accu
+      }
+    },
+    { net: 0, savings: 0, other: 0 },
+  )
+
   return (
     <>
-      <div className='container mx-auto h-full max-w-screen-md px-4 py-16 sm:px-8'>
-        <div className='w-full space-y-8'>
+      <div className='container mx-auto flex h-[calc(100dvh-4rem-4rem)] max-w-screen-md px-4 py-16 sm:px-8'>
+        <div className='flex h-full w-full flex-col gap-y-8'>
           <div className='flex items-center justify-between'>
             <h1 className='text-3xl font-bold'>Expenses</h1>
 
@@ -23,7 +64,29 @@ export default async function HomePage() {
             </Button>
           </div>
 
-          {expenses ? (
+          <Card>
+            <div className='flex items-center justify-between p-6'>
+              <h2
+                className={cn('flex-1 text-2xl font-bold tabular-nums', {
+                  'text-green-500': aggregations.net > 0,
+                  'text-red-500': aggregations.net < 0,
+                })}
+              >
+                {formatCurrency(aggregations.net)}
+              </h2>
+
+              <div className='flex flex-1 justify-between'>
+                <h3 className='text-xl font-bold tabular-nums text-blue-500'>
+                  {formatCurrency(aggregations.savings)}
+                </h3>
+                <h3 className='text-xl font-bold tabular-nums text-yellow-500'>
+                  {formatCurrency(aggregations.other)}
+                </h3>
+              </div>
+            </div>
+          </Card>
+
+          <ScrollArea className='flex-1 rounded border'>
             <div className='w-full'>
               {/* Desktop view */}
               <table className='hidden w-full sm:table sm:table-auto'>
@@ -70,10 +133,10 @@ export default async function HomePage() {
                     </div>
 
                     <div className='flex items-center justify-between gap-8'>
-                      <div className='truncate text-sm text-muted-foreground'>
+                      <div className='w-0 flex-1 truncate text-sm text-muted-foreground'>
                         {e.description ?? '-'}
                       </div>
-                      <div className='shrink-0 text-sm text-muted-foreground'>
+                      <div className='shrink-0 whitespace-nowrap text-sm text-muted-foreground'>
                         {formatDate(e.createdAt)}
                       </div>
                     </div>
@@ -81,7 +144,7 @@ export default async function HomePage() {
                 ))}
               </div>
             </div>
-          ) : null}
+          </ScrollArea>
         </div>
       </div>
     </>

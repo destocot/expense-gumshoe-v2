@@ -11,7 +11,7 @@ export default function MainLayout({
   return (
     <>
       <MainHeader />
-      <main className='h-[calc(100dvh-4rem-4rem)]'>
+      <main className='min-h-[calc(100dvh-4rem-4rem)]'>
         {modal}
         {children}
       </main>
