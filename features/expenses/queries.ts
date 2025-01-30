@@ -5,7 +5,6 @@ import { prisma } from '@/lib/prisma'
 
 export async function findAllExpenses() {
   const session = await auth()
-
   if (!session) return null
 
   const expenses = await prisma.expense.findMany({

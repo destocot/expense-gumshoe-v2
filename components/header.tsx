@@ -38,7 +38,7 @@ export const MainHeader = () => {
 
           <li>
             <SignedIn>
-              <Button size='sm' asChild>
+              <Button variant='ghost' size='sm' asChild>
                 <Link href='/profile'>Profile</Link>
               </Button>
             </SignedIn>
