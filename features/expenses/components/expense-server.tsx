@@ -34,8 +34,6 @@ export const ExpenseServer = async ({ searchParamsPromise }: ExpenseServer) => {
 
   if (!expenses) return null
 
-  console.log(expenses.length)
-
   return (
     <>
       <div className='px-4'>

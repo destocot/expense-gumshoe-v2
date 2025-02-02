@@ -19,17 +19,20 @@ function getRandomType(): ExpenseType {
 function getRandomDate() {
   const now = new Date()
 
-  // first date of this month
-  const firstDateThisMonth = new Date(now)
-  firstDateThisMonth.setDate(1)
-  firstDateThisMonth.setHours(0, 0, 0, 0)
+  const startOfWeek = new Date(now)
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay())
 
-  const lastDateThisMonth = new Date(now)
-  lastDateThisMonth.setMonth(now.getMonth() + 1)
-  lastDateThisMonth.setDate(0)
-  lastDateThisMonth.setHours(23, 59, 59, 999)
+  const startOfMonth = new Date(now)
+  startOfMonth.setDate(1)
+  startOfMonth.setHours(0, 0, 0, 0)
 
-  return faker.date.between({ from: firstDateThisMonth, to: lastDateThisMonth })
+  let from = startOfMonth
+
+  if (startOfWeek.getTime() < startOfMonth.getTime()) {
+    from = startOfWeek
+  }
+
+  return faker.helpers.maybe(() => faker.date.between({ from, to: now }))
 }
 
 function getRandomExpense() {
@@ -88,7 +91,7 @@ async function main() {
     select: { userId: true },
   })
 
-  const expenseQueries = Array.from({ length: 25 }, () => {
+  const expenseQueries = Array.from({ length: 50 }, () => {
     return prisma.expense.create({
       data: {
         ...getRandomExpense(),

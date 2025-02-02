@@ -18,7 +18,7 @@ export default function Page() {
         </CardHeader>
 
         <CardContent>
-          <CreateExpenseForm />
+          <CreateExpenseForm handleOpenChange={handleOpenChange} />
         </CardContent>
       </Card>
     </ResponsiveModal>

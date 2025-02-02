@@ -2,18 +2,17 @@
 
 import { Calendar1Icon, CalendarDaysIcon, CalendarRangeIcon } from 'lucide-react'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import type { Filter } from '@/features/expenses/types'
 
 export const MonthWeekDayToggle = ({ filter }: { filter?: Filter }) => {
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
 
   const createPageURL = (filter: Filter) => {
     const params = new URLSearchParams(searchParams)
     params.set('filter', filter)
-    return `${pathname}?${params.toString()}`
+    return `/expenses?${params.toString()}`
   }
 
   const handleFilterChange = (filter: Filter) => {

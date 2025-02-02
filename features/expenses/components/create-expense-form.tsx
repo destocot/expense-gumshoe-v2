@@ -24,7 +24,11 @@ import {
 } from '@/components/ui/form'
 import { DollarSignIcon } from 'lucide-react'
 
-export const CreateExpenseForm = () => {
+type CreateExpenseFormProps = { handleOpenChange?: () => void }
+
+export const CreateExpenseForm = ({ handleOpenChange }: CreateExpenseFormProps) => {
+  const close = handleOpenChange ? handleOpenChange : () => {}
+
   const form = useForm<CreateExpenseInput>({
     resolver: zodResolver(CreateExpenseSchema),
     defaultValues: { amount: '', description: '', type: TYPES[0] },
@@ -42,6 +46,8 @@ export const CreateExpenseForm = () => {
           if (message) form.setError('description', { message })
         }
       }
+    } else {
+      close()
     }
   }
 

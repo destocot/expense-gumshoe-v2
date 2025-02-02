@@ -43,7 +43,7 @@ model Expense {
   type        ExpenseType
   description String?
 
-  user   User   @relation(fields: [userId], references: [userId])
+  user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
   userId String @map("user_id")
 
   @@map("expenses")
