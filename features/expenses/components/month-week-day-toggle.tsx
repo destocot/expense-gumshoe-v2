@@ -3,23 +3,23 @@
 import { Calendar1Icon, CalendarDaysIcon, CalendarRangeIcon } from 'lucide-react'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import type { View } from '@/features/expenses/types'
+import type { Filter } from '@/features/expenses/types'
 
-export const MonthWeekDayToggle = ({ view }: { view: View }) => {
+export const MonthWeekDayToggle = ({ filter }: { filter?: Filter }) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const createPageURL = (view: View) => {
+  const createPageURL = (filter: Filter) => {
     const params = new URLSearchParams(searchParams)
-    params.set('view', view)
+    params.set('filter', filter)
     return `${pathname}?${params.toString()}`
   }
 
-  const handleViewChange = (view: View) => {
-    switch (view) {
-      case 'month':
-        router.push(createPageURL('month'))
+  const handleFilterChange = (filter: Filter) => {
+    switch (filter) {
+      case 'all':
+        router.push(createPageURL('all'))
         break
       case 'week':
         router.push(createPageURL('week'))
@@ -33,8 +33,8 @@ export const MonthWeekDayToggle = ({ view }: { view: View }) => {
   }
 
   return (
-    <ToggleGroup type='single' value={view} onValueChange={handleViewChange}>
-      <ToggleGroupItem value='month' aria-label='Toggle month'>
+    <ToggleGroup type='single' value={filter} onValueChange={handleFilterChange}>
+      <ToggleGroupItem value='all' aria-label='Toggle all'>
         <CalendarDaysIcon className='size-4' />
       </ToggleGroupItem>
       <ToggleGroupItem value='week' aria-label='Toggle week'>

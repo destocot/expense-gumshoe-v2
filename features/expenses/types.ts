@@ -1,1 +1,1 @@
-export type View = 'month' | 'week' | 'day'
+export type Filter = 'all' | 'week' | 'day'

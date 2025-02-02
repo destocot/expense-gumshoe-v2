@@ -1,15 +1,10 @@
 import { Card } from '@/components/ui/card'
-import { findAllExpenses } from '../queries'
 import { cn, formatCurrency } from '@/lib/utils'
-import type { View } from '@/features/expenses/types'
+import { Expense } from '@prisma/client'
 
-type ExpenseAggregationsProps = { view: View }
+type ExpenseAggregationsProps = { expenses: Array<Expense> }
 
-export const ExpenseAggregations = async ({ view }: ExpenseAggregationsProps) => {
-  const { data: expenses } = await findAllExpenses({ view })
-
-  if (!expenses) return null
-
+export const ExpenseAggregations = async ({ expenses }: ExpenseAggregationsProps) => {
   const aggregations = expenses.reduce(
     (accu, { type, amount }) => {
       switch (type) {

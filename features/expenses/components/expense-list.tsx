@@ -1,16 +1,11 @@
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { ExpenseTypeBadge } from '@/features/expenses/components/expense-type-badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { findAllExpenses } from '@/features/expenses/queries'
-import type { View } from '@/features/expenses/types'
+import { Expense } from '@prisma/client'
 
-type ExpenseAggregationsProps = { view: View }
+type ExpenseListProps = { expenses: Array<Expense> }
 
-export const ExpenseList = async ({ view }: ExpenseAggregationsProps) => {
-  const { data: expenses } = await findAllExpenses({ view })
-
-  if (!expenses) return null
-
+export const ExpenseList = ({ expenses }: ExpenseListProps) => {
   return expenses.map((e) => (
     <li key={e.expenseId}>
       <Card key={e.expenseId} className='rounded'>
