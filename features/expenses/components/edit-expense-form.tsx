@@ -25,6 +25,7 @@ import { DollarSignIcon } from 'lucide-react'
 import type { Expense } from '@prisma/client'
 import { editExpenseAction } from '@/features/expenses/actions/edit-expense-action'
 import { redirect } from 'next/navigation'
+import { Textarea } from '@/components/ui/textarea'
 
 type EditExpenseFormProps = {
   defaultValues: Expense
@@ -141,7 +142,7 @@ export const EditExpenseForm = ({ defaultValues, handleOpenChange }: EditExpense
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Textarea {...field} className='resize-none' maxLength={200} />
               </FormControl>
               <FormMessage />
             </FormItem>

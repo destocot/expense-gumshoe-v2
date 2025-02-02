@@ -2,7 +2,7 @@ import { formatCurrency, formatDate } from '@/lib/utils'
 import { ExpenseTypeBadge } from '@/features/expenses/components/expense-type-badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Expense } from '@prisma/client'
-import { ExpenseActionButtons } from './expense-action-buttons'
+import { ExpenseActionButtons } from '@/features/expenses/components/expense-action-buttons'
 
 type ExpenseListProps = { expenses: Array<Expense> }
 
@@ -18,12 +18,12 @@ export const ExpenseList = ({ expenses }: ExpenseListProps) => {
           <CardDescription>{formatDate(e.createdAt)}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className='relative flex items-center justify-between gap-2'>
-            <p className='line-clamp-1 text-sm text-muted-foreground group-hover:max-w-[45ch] md:group-hover:max-w-[55ch]'>
+          <div className='relative flex items-center'>
+            <p className='line-clamp-1 break-all pr-20 text-sm text-muted-foreground sm:pr-36'>
               {e.description ?? '-'}
             </p>
 
-            <div className='absolute right-0 hidden group-hover:block'>
+            <div className='absolute right-0 opacity-0 group-hover:opacity-100'>
               <ExpenseActionButtons expenseId={e.expenseId} />
             </div>
           </div>

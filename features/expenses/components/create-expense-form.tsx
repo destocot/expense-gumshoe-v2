@@ -23,6 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { DollarSignIcon } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
 
 type CreateExpenseFormProps = { handleOpenChange?: () => void }
 
@@ -129,7 +130,7 @@ export const CreateExpenseForm = ({ handleOpenChange }: CreateExpenseFormProps) 
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Textarea {...field} className='resize-none' maxLength={200} />
               </FormControl>
               <FormMessage />
             </FormItem>

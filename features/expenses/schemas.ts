@@ -6,11 +6,13 @@ export const TYPES = Object.values(ExpenseType) as [ExpenseType, ...Array<Expens
 export const CreateExpenseSchema = z.object({
   amount: z
     .string({ required_error: 'Please enter an amount.' })
-    .regex(/^\d*\.?\d{0,2}$/, 'Amount must have up to 2 decimal places.'),
+    .regex(/^\d*\.?\d{0,2}$/, 'Amount must have up to 2 decimal places.')
+    .refine((val) => parseFloat(val) > 0, { message: 'Amount must be greater than 0.' }),
   type: z.enum(TYPES, { required_error: 'Please select a valid option.' }),
   description: z
     .string()
     .trim()
+    .max(200, 'Description must be at most 200 characters.')
     .optional()
     .transform((val) => (val === '' ? undefined : val)),
 })
