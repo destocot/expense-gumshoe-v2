@@ -15,5 +15,21 @@ export const CreateExpenseSchema = z.object({
     .transform((val) => (val === '' ? undefined : val)),
 })
 
+export const EditExpenseSchema = CreateExpenseSchema.partial()
+  .extend({
+    expenseId: z
+      .string({ required_error: 'Please provide an expense ID.' })
+      .cuid({ message: 'Please provide a valid expense ID.' }),
+  })
+  .refine(
+    ({ expenseId: _, ...data }) => {
+      return Object.keys(data).length > 0
+    },
+    { message: 'Please provide at least one field to update.' },
+  )
+
 export type CreateExpenseInput = z.input<typeof CreateExpenseSchema>
 export type CreateExpenseOutput = z.output<typeof CreateExpenseSchema>
+
+export type EditExpenseInput = z.input<typeof EditExpenseSchema>
+export type EditExpenseOutput = z.output<typeof EditExpenseSchema>

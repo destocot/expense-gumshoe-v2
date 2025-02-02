@@ -6,7 +6,7 @@ type MonthWeekDayToggleServer = { searchParamsPromise: Promise<{ filter?: Filter
 export const MonthWeekDayToggleServer = async ({
   searchParamsPromise,
 }: MonthWeekDayToggleServer) => {
-  const filter = (await searchParamsPromise).filter
+  const filter = (await searchParamsPromise).filter ?? 'week'
 
   return <MonthWeekDayToggle filter={filter} />
 }

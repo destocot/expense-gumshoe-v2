@@ -15,3 +15,14 @@ export async function findAllExpenses(where: Prisma.ExpenseWhereInput) {
 
   return { data: expenses }
 }
+
+export async function findOneExpense(where: Prisma.ExpenseWhereUniqueInput) {
+  const session = await auth()
+  if (!session) return { data: null }
+
+  const expense = await prisma.expense.findUnique({
+    where: { userId: session.user.id, ...where },
+  })
+
+  return { data: expense }
+}

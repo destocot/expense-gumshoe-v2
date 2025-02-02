@@ -4,6 +4,7 @@ import { Calendar1Icon, CalendarDaysIcon, CalendarRangeIcon } from 'lucide-react
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type { Filter } from '@/features/expenses/types'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 export const MonthWeekDayToggle = ({ filter }: { filter?: Filter }) => {
   const searchParams = useSearchParams()
@@ -33,15 +34,44 @@ export const MonthWeekDayToggle = ({ filter }: { filter?: Filter }) => {
 
   return (
     <ToggleGroup type='single' value={filter} onValueChange={handleFilterChange}>
-      <ToggleGroupItem value='all' aria-label='Toggle all'>
-        <CalendarDaysIcon className='size-4' />
-      </ToggleGroupItem>
-      <ToggleGroupItem value='week' aria-label='Toggle week'>
-        <CalendarRangeIcon className='size-4' />
-      </ToggleGroupItem>
-      <ToggleGroupItem value='day' aria-label='Toggle day'>
-        <Calendar1Icon className='size-4' />
-      </ToggleGroupItem>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div>
+            <ToggleGroupItem value='all' aria-label='Toggle all'>
+              <CalendarDaysIcon className='size-4' />
+            </ToggleGroupItem>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>all</p>
+        </TooltipContent>
+      </Tooltip>
+
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div>
+            <ToggleGroupItem value='week' aria-label='Toggle week'>
+              <CalendarRangeIcon className='size-4' />
+            </ToggleGroupItem>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>week</p>
+        </TooltipContent>
+      </Tooltip>
+
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div>
+            <ToggleGroupItem value='day' aria-label='Toggle day'>
+              <Calendar1Icon className='size-4' />
+            </ToggleGroupItem>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>day</p>
+        </TooltipContent>
+      </Tooltip>
     </ToggleGroup>
   )
 }

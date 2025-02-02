@@ -3,6 +3,7 @@ import { Inter_Tight } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { SessionProvider } from '@/components/session-provider'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 const inter = Inter_Tight({ subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
