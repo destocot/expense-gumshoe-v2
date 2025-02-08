@@ -142,7 +142,7 @@ export const EditExpenseForm = ({ defaultValues, handleOpenChange }: EditExpense
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} className='resize-none' maxLength={200} />
+                <Textarea {...field} className='resize-none' maxLength={200} rows={4} />
               </FormControl>
               <FormMessage />
             </FormItem>

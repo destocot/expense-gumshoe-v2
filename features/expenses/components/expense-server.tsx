@@ -1,4 +1,3 @@
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { findAllExpenses } from '@/features/expenses/queries'
 import type { Filter } from '@/features/expenses/types'
 import { ExpenseAggregations } from '@/features/expenses/components/expense-aggregations'
@@ -40,11 +39,7 @@ export const ExpenseServer = async ({ searchParamsPromise }: ExpenseServer) => {
         <ExpenseAggregations expenses={expenses} />
       </div>
 
-      <ScrollArea className='grow overflow-auto px-4'>
-        <ul className='space-y-3'>
-          <ExpenseList expenses={expenses} />
-        </ul>
-      </ScrollArea>
+      <ExpenseList expenses={expenses} />
     </>
   )
 }

@@ -8,9 +8,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { RegisterForm } from '@/features/auth/components/register-form'
+import { auth } from '@/lib/auth'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  if (await auth()) redirect('/')
+
   return (
     <div className='container mx-auto flex h-full max-w-screen-md items-center justify-center px-4 sm:px-8'>
       <Card className='w-full max-w-sm border-0 shadow-none sm:border sm:shadow'>

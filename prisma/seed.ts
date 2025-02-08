@@ -78,10 +78,13 @@ async function truncate() {
 async function main() {
   await truncate()
 
+  const username = `${process.env.TEST_USERNAME}`
+  const password = `${process.env.TEST_PASSWORD}`
+
   const user = await prisma.user.create({
     data: {
-      username: 'testing',
-      password: await hash('testing', {
+      username,
+      password: await hash(password, {
         memoryCost: 19456,
         timeCost: 2,
         outputLen: 32,

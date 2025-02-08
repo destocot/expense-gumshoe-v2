@@ -1,11 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { EditExpenseForm } from '@/features/expenses/components/edit-expense-form'
 import { findOneExpense } from '@/features/expenses/queries'
-import { notFound } from 'next/navigation'
+import { auth } from '@/lib/auth'
+import { notFound, redirect } from 'next/navigation'
 
 type PageProps = { params: Promise<{ expenseId: string }> }
 
 export default async function Page({ params }: PageProps) {
+  const session = await auth()
+  if (!session) redirect('/login')
+
   const expenseId = (await params).expenseId
 
   const { data: expense } = await findOneExpense({ expenseId })
